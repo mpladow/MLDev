@@ -5,7 +5,9 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://mldevlotowvault.vault.azure.net/",
+        "AZURE_USERNAME": "michael.ladow@outlook.com"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7047;http://localhost:5159"
@@ -15,7 +17,9 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://mldevlotowvault.vault.azure.net/",
+        "AZURE_USERNAME": "michael.ladow@outlook.com"
       }
     },
     "Docker": {
@@ -23,7 +27,11 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "publishAllPorts": true,
-      "useSSL": true
+      "useSSL": true,
+      "environmentVariables": {
+        "VaultUri": "https://mldevlotowvault.vault.azure.net/",
+        "AZURE_USERNAME": "michael.ladow@outlook.com"
+      }
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",

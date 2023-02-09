@@ -19,6 +19,7 @@ namespace MLDev.LOTOW.Data
 
         public DbSet<Character> Characters { get; set; }
         public DbSet<Stat> Stats { get; set; }
-        public DbSet<StatModifier> StatModifier { get; set; }
+        public DbSet<StatModifier> StatModifiers { get; set; }
+        public DbSet<CharacterStat> CharacterStats { get; set; }
     }
 }

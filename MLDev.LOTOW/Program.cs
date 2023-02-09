@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MLDev.LOTOW.Data;
+using MLDev.LOTOW.Services;
 
 namespace MLDev.LOTOW
 {
@@ -9,16 +10,18 @@ namespace MLDev.LOTOW
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var connString = builder.Configuration.GetConnectionString("MLDevLOTWContext");
             // Add services to the container.
-
+            
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<LOTOWDbContext>(options =>
-                options.UseSqlServer()
+                options.UseSqlServer(connString)
             );
 
+            builder.Services.AddScoped<ICharacterService, CharacterService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

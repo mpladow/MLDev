@@ -8,8 +8,6 @@ namespace MLDev.LOTOW.Models
         public int StatId { get; set; }
         public decimal Order { get; set; }
         public string Name { get; set; }
-        public int Value { get; set; }
-        public bool IsMight { get; set; }
-        public bool IsFate { get; set; }
+        public bool IsFinite { get; set; }// if this stat has a set ammount
     }
 }

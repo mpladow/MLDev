@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MLDev.LOTOW.Models;
+using MLDev.LOTOW.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,10 +11,16 @@ namespace MLDev.LOTOW.Controllers
     public class CharactersController : ControllerBase
     {
         // GET: api/<CharactersController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private ICharacterService _characterService;
+
+        public CharactersController(ICharacterService characterService)
         {
-            return new string[] { "value1", "value2" };
+            _characterService= characterService;
+        }
+        [HttpGet]
+        public IEnumerable<Character> Get()
+        {
+            return _characterService.GetCharacters();
         }
 
         // GET api/<CharactersController>/5

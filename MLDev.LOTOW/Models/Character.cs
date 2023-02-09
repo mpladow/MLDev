@@ -14,8 +14,7 @@ namespace MLDev.LOTOW.Models
         public decimal Level { get; set; }
         [Precision(14, 2)]
         public decimal Cost { get; set; }
-        public List<CharacterStat> Stats { get; set; } // contains the actual stats, including the finite ones default value
-        public List<CharacterFiniteStatValue> FiniteStatValues { get; set; }// contains the current values of any finite values
+        public List<CharacterStat> CharacterStats { get; set; } // contains all of the stats,including finite stats
 
         // TODO: Add List of special rules
     }

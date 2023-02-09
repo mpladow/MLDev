@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using MLDev.LOTOW.Data;
+
 namespace MLDev.LOTOW
 {
     public class Program
@@ -12,6 +15,9 @@ namespace MLDev.LOTOW
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<LOTOWDbContext>(options =>
+                options.UseSqlServer()
+            );
 
             var app = builder.Build();
 

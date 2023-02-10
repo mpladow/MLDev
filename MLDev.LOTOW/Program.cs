@@ -10,15 +10,15 @@ namespace MLDev.LOTOW
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            var connString = builder.Configuration.GetConnectionString("MLDevLOTWContext");
+            var connString = builder.Configuration.GetConnectionString("defaultConnection");
             // Add services to the container.
-            
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<LOTOWDbContext>(options =>
-                options.UseSqlServer(connString)
+                options.UseSqlServer("defaultConnection")
             );
 
             builder.Services.AddScoped<ICharacterService, CharacterService>();
@@ -30,6 +30,7 @@ namespace MLDev.LOTOW
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
 
             app.UseHttpsRedirection();
 

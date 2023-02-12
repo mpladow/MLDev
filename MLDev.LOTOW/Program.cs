@@ -18,7 +18,7 @@ namespace MLDev.LOTOW
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<LOTOWDbContext>(options =>
-                options.UseSqlServer("defaultConnection")
+                options.UseSqlServer(connString)
             );
 
             builder.Services.AddScoped<ICharacterService, CharacterService>();

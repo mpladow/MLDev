@@ -8,6 +8,6 @@ namespace MLDev.LOTOW.Models
         public int StatId { get; set; }
         public int Order { get; set; }
         public string Name { get; set; }
-        public bool IsFinite { get; set; }// if this stat has a set ammount
+        public bool IsFinite { get; set; }// if this stat has a set amount
     }
 }

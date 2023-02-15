@@ -13,25 +13,6 @@ namespace MLDev.LOTOW.Services
             _dbContext = dbContext;
         }
 
-        //private static List<Character> _characterList = new List<Character>() {
-        //new Character()
-        //{
-        //    CharacterId= 1,
-        //    Name="Bob",
-        //    Cost= 7,
-        //    Level= 1,
-        //    CharacterStats=new List<CharacterStat>()
-        //    {
-        //        new CharacterStat()
-        //        {
-        //            CharacterStatId= 1,
-        //            CurrentValue=3,
-        //            StatId=1,
-        //            InitialValue=3,
-        //        }
-        //    }
-        //}
-        //};
         public List<Character> GetCharacters()
         {
             return _dbContext.Characters.ToList();
@@ -39,15 +20,20 @@ namespace MLDev.LOTOW.Services
         public Character CreateCharacter(Character character)
         {
             character.CharacterId = 123;
-            _dbContext.Characters.Add(character);
-            return character;
+            var result = _dbContext.Characters.Add(character);
+            return result.Entity;
         }
 
-        public void DeleteCharacter(int id)
+        public bool DeleteCharacter(int id)
         {
             var entity = _dbContext.Characters.FirstOrDefault(x =>x.CharacterId== id);   
+            if (entity == null)
+            {
+                return false;
+            }
             _dbContext.Characters.Remove(entity);
             _dbContext.SaveChanges();
+            return true;
         }
 
         public Character GetCharacterById(int id)

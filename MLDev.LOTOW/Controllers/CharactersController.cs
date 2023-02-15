@@ -25,27 +25,34 @@ namespace MLDev.LOTOW.Controllers
 
         // GET api/<CharactersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Character Get(int id)
         {
-            return "value";
+            var character = _characterService.GetCharacterById(id);
+            return character;
         }
 
         // POST api/<CharactersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Character Post([FromBody] Character character)
         {
+            var result = _characterService.CreateCharacter(character);
+            return result;
         }
 
         // PUT api/<CharactersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public Character Put([FromBody] Character character)
         {
+            var result = _characterService.UpdateCharacter(character);
+            return result;
         }
 
         // DELETE api/<CharactersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            var result = _characterService.DeleteCharacter(id);
+            return result;
         }
     }
 }

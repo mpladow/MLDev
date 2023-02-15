@@ -8,6 +8,6 @@ namespace MLDev.LOTOW.Services
         Character GetCharacterById(int id);
         Character CreateCharacter(Character character);
         Character UpdateCharacter(Character character);
-        void DeleteCharacter(int id);
+        bool DeleteCharacter(int id);
     }
 }

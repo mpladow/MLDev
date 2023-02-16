@@ -1,4 +1,4 @@
-﻿namespace MLDev.LOTOW.Models
+﻿namespace MLDev.LOTOW.DTOs
 {
     public class RegisterUserResult
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MLDev.LOTOW.DTOs;
-using MLDev.LOTOW.Models;
+using MLDev.LOTOW.Models.Authentication;
 
 namespace MLDev.LOTOW.Automapper.Mappings
 {

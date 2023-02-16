@@ -7,7 +7,7 @@ using MLDev.LOTOW.Services.Interfaces;
 
 namespace MLDev.LOTOW.Controllers
 {
-    //[Authorize]
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class CharactersController : ControllerBase

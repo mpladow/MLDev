@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MLDev.LOTOW.Models;
+using MLDev.LOTOW.Models.Authentication;
 
 namespace MLDev.LOTOW.Data
 {

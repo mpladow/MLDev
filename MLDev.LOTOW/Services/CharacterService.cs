@@ -1,5 +1,7 @@
 ﻿using MLDev.LOTOW.Data;
 using MLDev.LOTOW.Models;
+using MLDev.LOTOW.Repositories;
+using MLDev.LOTOW.Repositories.Interfaces;
 using MLDev.LOTOW.Services.Interfaces;
 
 namespace MLDev.LOTOW.Services
@@ -7,61 +9,36 @@ namespace MLDev.LOTOW.Services
     public class CharacterService : ICharacterService
     {
 
-        private readonly LOTOWDbContext _dbContext;
+        private readonly ICharacterRepository _characterRepository;
 
-        public CharacterService(LOTOWDbContext dbContext)
+        public CharacterService(ICharacterRepository characterRepository)
         {
-            _dbContext = dbContext;
+            _characterRepository = characterRepository;
         }
 
         public List<Character> GetCharacters()
         {
-            return _dbContext.Characters.ToList();
+            return _characterRepository.Get();
         }
         public Character CreateCharacter(Character character)
         {
-            character.CharacterId = 123;
-            var result = _dbContext.Characters.Add(character);
-            return result.Entity;
+            return _characterRepository.Create(character);
         }
 
         public bool DeleteCharacter(int id)
         {
-            var entity = _dbContext.Characters.FirstOrDefault(x =>x.CharacterId== id);   
-            if (entity == null)
-            {
-                return false;
-            }
-            _dbContext.Characters.Remove(entity);
-            _dbContext.SaveChanges();
-            return true;
+            return _characterRepository.Delete(id);
         }
 
         public Character GetCharacterById(int id)
         {
-            var entity = _dbContext.Characters.FirstOrDefault(x => x.CharacterId == id);
-            if (entity == null)
-            {
-                return null;
-            }
-            return entity;
+            return _characterRepository.Get(id);
         }
-
 
 
         public Character UpdateCharacter(Character character)
         {
-            var entity = _dbContext.Characters.FirstOrDefault(x => x.CharacterId == character.CharacterId);
-            if (entity == null)
-            {
-                return null;
-            }
-            entity.Name = character.Name;
-            entity.Level = character.Level;
-            entity.Cost = character.Cost;
-            entity.CharacterStats = character.CharacterStats;
-
-            return entity;
+            return _characterRepository.Update(character);
         }
     }
 }

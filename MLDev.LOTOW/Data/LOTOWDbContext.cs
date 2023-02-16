@@ -4,7 +4,7 @@ using MLDev.LOTOW.Models;
 
 namespace MLDev.LOTOW.Data
 {
-    public class LOTOWDbContext: IdentityDbContext<User>
+    public class LOTOWDbContext: IdentityDbContext<User, AppRole,Guid>
     {
         public LOTOWDbContext(DbContextOptions<LOTOWDbContext> options):base(options) { 
         

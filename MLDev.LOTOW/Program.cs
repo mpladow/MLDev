@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MLDev.LOTOW.Automapper.Mappings;
 using MLDev.LOTOW.Data;
 using MLDev.LOTOW.Models;
+using MLDev.LOTOW.Repositories;
+using MLDev.LOTOW.Repositories.Interfaces;
 using MLDev.LOTOW.Services;
 using MLDev.LOTOW.Services.Interfaces;
 
@@ -16,13 +19,16 @@ namespace MLDev.LOTOW
             var connString = builder.Configuration.GetConnectionString("defaultConnection");
 
             // configure identity
-            builder.Services.AddIdentity<User, IdentityRole>(o =>
-            {
-                o.Password.RequireDigit = true;
-                o.User.RequireUniqueEmail = true;
-            })
+            builder.Services.AddIdentity<User, AppRole>()
             .AddEntityFrameworkStores<LOTOWDbContext>()
             .AddDefaultTokenProviders();
+
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequireDigit = true;
+                options.Password.RequireNonAlphanumeric = false;
+            });
 
             // Add services to the container.
 
@@ -33,8 +39,11 @@ namespace MLDev.LOTOW
             builder.Services.AddDbContext<LOTOWDbContext>(options =>
                 options.UseSqlServer(connString)
             );
-
+            builder.Services.AddScoped<ICharacterRepository, CharacterRepository>();
+            builder.Services.AddScoped<IUserAuthenticationRepository, UserAuthenticationRespository>();
             builder.Services.AddScoped<ICharacterService, CharacterService>();
+            builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
+            builder.Services.AddAutoMapper(typeof(UserMappingProfile).Assembly);
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

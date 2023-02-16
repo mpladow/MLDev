@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MLDev.LOTOW.Data;
+using MLDev.LOTOW.Models;
 using MLDev.LOTOW.Services;
+using MLDev.LOTOW.Services.Interfaces;
 
 namespace MLDev.LOTOW
 {
@@ -11,6 +14,16 @@ namespace MLDev.LOTOW
             var builder = WebApplication.CreateBuilder(args);
 
             var connString = builder.Configuration.GetConnectionString("defaultConnection");
+
+            // configure identity
+            builder.Services.AddIdentity<User, IdentityRole>(o =>
+            {
+                o.Password.RequireDigit = true;
+                o.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<LOTOWDbContext>()
+            .AddDefaultTokenProviders();
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -32,8 +45,11 @@ namespace MLDev.LOTOW
             }
 
 
+
+
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

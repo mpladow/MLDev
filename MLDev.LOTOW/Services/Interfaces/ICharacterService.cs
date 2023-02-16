@@ -1,6 +1,6 @@
 ﻿using MLDev.LOTOW.Models;
 
-namespace MLDev.LOTOW.Services
+namespace MLDev.LOTOW.Services.Interfaces
 {
     public interface ICharacterService
     {

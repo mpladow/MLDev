@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MLDev.LOTOW.Models;
 
 namespace MLDev.LOTOW.Data
 {
-    public class LOTOWDbContext: DbContext
+    public class LOTOWDbContext: IdentityDbContext<User>
     {
         public LOTOWDbContext(DbContextOptions<LOTOWDbContext> options):base(options) { 
         
@@ -11,10 +12,10 @@ namespace MLDev.LOTOW.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("LOTOW");
-            modelBuilder.Entity<Character>().ToTable("Characters");
-            modelBuilder.Entity<Stat>().ToTable("Stats");
-            modelBuilder.Entity<StatModifier>().ToTable("StatModifiers");
+            base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<Character>().ToTable("Characters");
+            //modelBuilder.Entity<Stat>().ToTable("Stats");
+            //modelBuilder.Entity<StatModifier>().ToTable("StatModifiers");
         }
 
         public DbSet<Character> Characters { get; set; }

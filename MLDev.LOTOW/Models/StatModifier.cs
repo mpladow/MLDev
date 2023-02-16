@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MLDev.LOTOW.Models
 {
-
+    [Table("StatModifier", Schema = "LOTOW")]
     public class StatModifier
     {
         public int StatModifierId { get; set; }

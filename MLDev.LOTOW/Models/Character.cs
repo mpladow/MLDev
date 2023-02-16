@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MLDev.LOTOW.Models
 {
-    
+    [Table("Character", Schema= "LOTOW")]
     public class Character
     {
         public int CharacterId { get; set; }

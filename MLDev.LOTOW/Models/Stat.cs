@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MLDev.LOTOW.Models
 {
+    [Table("Stat", Schema = "LOTOW")]
+
     public class Stat
     {
         public int StatId { get; set; }

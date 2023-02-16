@@ -1,5 +1,8 @@
-﻿namespace MLDev.LOTOW.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MLDev.LOTOW.Models
 {
+    [Table("CharacterStat", Schema = "LOTOW")]
     public class CharacterStat
     {
         public int CharacterStatId { get; set; }

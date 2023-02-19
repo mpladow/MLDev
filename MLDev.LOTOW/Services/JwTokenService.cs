@@ -16,12 +16,12 @@ namespace MLDev.LOTOW.Services
 
         public JwtSecurityToken GetJwtSecurityToken(List<Claim> userClaims)
         {
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]));
-            var expiryInMinutes = Convert.ToInt32(_configuration["Jwt:ExpiryInMinutes"]);
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtAuthentication:AccessTokenSecret"]));
+            var expiryInMinutes = Convert.ToInt32(_configuration["JwtAuthentication:ExpiryInMinutes"]);
 
             var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:ValidIssuer"],
-                audience: _configuration["Jwt:ValidAudience"],
+                issuer: _configuration["JwtAuthentication:ValidIssuer"],
+                audience: _configuration["JwtAuthentication:ValidAudience"],
                 claims: userClaims,
                 expires: DateTime.Now.AddMinutes(expiryInMinutes),
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256));

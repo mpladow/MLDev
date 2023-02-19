@@ -51,9 +51,9 @@ namespace MLDev.LOTOW
                         ValidateAudience = true,
                         ValidateIssuerSigningKey = true,
                         ValidateLifetime = true,
-                        ValidIssuer = builder.Configuration["Jwt:ValidIssuer"],
-                        ValidAudience = builder.Configuration["Jwt:ValidAudience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
+                        ValidIssuer = builder.Configuration["JwtAuthentication:ValidIssuer"],
+                        ValidAudience = builder.Configuration["JwtAuthentication:ValidAudience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtAuthentication:AccessTokenSecret"])),
                         ClockSkew = TimeSpan.Zero
                     };
                 });

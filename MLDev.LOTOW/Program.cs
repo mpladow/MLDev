@@ -1,3 +1,4 @@
+using Azure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using MLDev.LOTOW.Repositories;
 using MLDev.LOTOW.Repositories.Interfaces;
 using MLDev.LOTOW.Services;
 using MLDev.LOTOW.Services.Interfaces;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace MLDev.LOTOW
@@ -33,6 +35,13 @@ namespace MLDev.LOTOW
                 options.Password.RequireDigit = true;
                 options.Password.RequireNonAlphanumeric = false;
             });
+
+         if (builder.Environment.IsProduction())
+            {
+                builder.Configuration.AddAzureKeyVault(
+                    new Uri($"https://{builder.Configuration["KeyVaultName"]}.vault.azure.net/"),
+                    new DefaultAzureCredential());
+            }
 
             // configure jwt and auth
             builder.Services.AddAuthentication(o =>
@@ -63,7 +72,8 @@ namespace MLDev.LOTOW
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c => {
+            builder.Services.AddSwaggerGen(c =>
+            {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "JWTToken_Auth_API",

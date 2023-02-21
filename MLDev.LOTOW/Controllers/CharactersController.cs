@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MLDev.LOTOW.DTOs;
 using MLDev.LOTOW.Models;
+using MLDev.LOTOW.Repositories.Interfaces;
 using MLDev.LOTOW.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,29 +15,34 @@ namespace MLDev.LOTOW.Controllers
     public class CharactersController : ControllerBase
     {
         // GET: api/<CharactersController>
-        private ICharacterService _characterService;
+        private ICharacterRepository _repo;
 
-        public CharactersController(ICharacterService characterService)
+        public ICharacterService _characterService;
+
+        public CharactersController(ICharacterRepository characterRepository
+            ,ICharacterService characterService)
         {
-            _characterService= characterService;
+            _repo = characterRepository;
+            _characterService = characterService;
         }
         [HttpGet]
-        public IEnumerable<Character> Get()
+        public IEnumerable<CharacterDto> Get()
         {
-            return _characterService.GetCharacters();
+            var characters = _characterService.GetCharacters();
+            return characters;
         }
 
         // GET api/<CharactersController>/5
         [HttpGet("{id}")]
-        public Character Get(int id)
+        public CharacterDto Get(int id)
         {
-            var character = _characterService.GetCharacterById(id);
-            return character;
+            var response = _characterService.GetCharacterById(id);
+            return response;
         }
 
         // POST api/<CharactersController>
         [HttpPost]
-        public Character Post([FromBody] Character character)
+        public CharacterDto Post([FromBody] CharacterDto character)
         {
             var result = _characterService.CreateCharacter(character);
             return result;
@@ -43,15 +50,16 @@ namespace MLDev.LOTOW.Controllers
 
         // PUT api/<CharactersController>/5
         [HttpPut("{id}")]
-        public Character Put([FromBody] Character character)
+        public CharacterDto Put([FromBody] CharacterDto character)
         {
             var result = _characterService.UpdateCharacter(character);
+            _repo.Save();
             return result;
         }
 
         // DELETE api/<CharactersController>/5
         [HttpDelete("{id}")]
-        public bool Delete(int id)
+        public ResponseDto Delete(int id)
         {
             var result = _characterService.DeleteCharacter(id);
             return result;

@@ -1,4 +1,4 @@
-﻿using MLDev.LOTOW.Models;
+﻿using MLDev.LOTOW.Data.Entities;
 using MLDev.LOTOW.Services.Interfaces;
 
 namespace MLDev.LOTOW.Services

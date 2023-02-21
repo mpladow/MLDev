@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MLDev.LOTOW.Models
+namespace MLDev.LOTOW.Data.Entities
 {
     [Table("CharacterStat", Schema = "LOTOW")]
     public class CharacterStat

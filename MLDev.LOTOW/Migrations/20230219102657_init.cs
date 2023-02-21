@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MLDev.LOTOW.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateSchemas : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,7 @@ namespace MLDev.LOTOW.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -32,7 +32,7 @@ namespace MLDev.LOTOW.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -56,7 +56,8 @@ namespace MLDev.LOTOW.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Characters",
+                name: "Character",
+                schema: "LOTOW",
                 columns: table => new
                 {
                     CharacterId = table.Column<int>(type: "int", nullable: false)
@@ -67,11 +68,12 @@ namespace MLDev.LOTOW.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Characters", x => x.CharacterId);
+                    table.PrimaryKey("PK_Character", x => x.CharacterId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stats",
+                name: "Stat",
+                schema: "LOTOW",
                 columns: table => new
                 {
                     StatId = table.Column<int>(type: "int", nullable: false)
@@ -82,7 +84,7 @@ namespace MLDev.LOTOW.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stats", x => x.StatId);
+                    table.PrimaryKey("PK_Stat", x => x.StatId);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,7 +93,7 @@ namespace MLDev.LOTOW.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -112,7 +114,7 @@ namespace MLDev.LOTOW.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -134,7 +136,7 @@ namespace MLDev.LOTOW.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -151,8 +153,8 @@ namespace MLDev.LOTOW.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -175,7 +177,7 @@ namespace MLDev.LOTOW.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -207,21 +209,24 @@ namespace MLDev.LOTOW.Migrations
                 {
                     table.PrimaryKey("PK_CharacterStat", x => x.CharacterStatId);
                     table.ForeignKey(
-                        name: "FK_CharacterStat_Characters_CharacterId",
+                        name: "FK_CharacterStat_Character_CharacterId",
                         column: x => x.CharacterId,
-                        principalTable: "Characters",
+                        principalSchema: "LOTOW",
+                        principalTable: "Character",
                         principalColumn: "CharacterId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CharacterStat_Stats_StatId",
+                        name: "FK_CharacterStat_Stat_StatId",
                         column: x => x.StatId,
-                        principalTable: "Stats",
+                        principalSchema: "LOTOW",
+                        principalTable: "Stat",
                         principalColumn: "StatId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "StatModifiers",
+                name: "StatModifier",
+                schema: "LOTOW",
                 columns: table => new
                 {
                     StatModifierId = table.Column<int>(type: "int", nullable: false)
@@ -232,9 +237,9 @@ namespace MLDev.LOTOW.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StatModifiers", x => x.StatModifierId);
+                    table.PrimaryKey("PK_StatModifier", x => x.StatModifierId);
                     table.ForeignKey(
-                        name: "FK_StatModifiers_CharacterStat_CharacterStatId",
+                        name: "FK_StatModifier_CharacterStat_CharacterStatId",
                         column: x => x.CharacterStatId,
                         principalSchema: "LOTOW",
                         principalTable: "CharacterStat",
@@ -293,8 +298,9 @@ namespace MLDev.LOTOW.Migrations
                 column: "StatId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StatModifiers_CharacterStatId",
-                table: "StatModifiers",
+                name: "IX_StatModifier_CharacterStatId",
+                schema: "LOTOW",
+                table: "StatModifier",
                 column: "CharacterStatId");
         }
 
@@ -317,7 +323,8 @@ namespace MLDev.LOTOW.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "StatModifiers");
+                name: "StatModifier",
+                schema: "LOTOW");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -330,10 +337,12 @@ namespace MLDev.LOTOW.Migrations
                 schema: "LOTOW");
 
             migrationBuilder.DropTable(
-                name: "Characters");
+                name: "Character",
+                schema: "LOTOW");
 
             migrationBuilder.DropTable(
-                name: "Stats");
+                name: "Stat",
+                schema: "LOTOW");
         }
     }
 }

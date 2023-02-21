@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MLDev.LOTOW.Data;
+using MLDev.LOTOW.Data.Entities;
 using MLDev.LOTOW.Models;
 using MLDev.LOTOW.Repositories.Interfaces;
 
@@ -10,31 +11,35 @@ namespace MLDev.LOTOW.Repositories
         private readonly LOTOWDbContext _dbContext;
         public CharacterRepository(LOTOWDbContext dbContext)
         {
-            _dbContext= dbContext;
+            _dbContext = dbContext;
         }
-        public List<Character> Get()
+        public List<Character> GetCharacters()
         {
             return _dbContext.Characters.ToList();
         }
-        public Character Create(Character character)
+        public Character CreateCharacter(Character character)
         {
             var result = _dbContext.Characters.Add(character);
+            _dbContext.SaveChanges();
             return result.Entity;
         }
 
-        public bool Delete(int id)
+        public ResponseDto DeleteCharacter(int id)
         {
+            var response = new ResponseDto();
             var entity = _dbContext.Characters.FirstOrDefault(x => x.CharacterId == id);
             if (entity == null)
             {
-                return false;
+                response.Success = false;
+                response.ErrorMessage = "No Character Found";
             }
             _dbContext.Characters.Remove(entity);
             _dbContext.SaveChanges();
-            return true;
+            response.Success = true;
+            return response;
         }
 
-        public Character Get(int id)
+        public Character GetCharacter(int id)
         {
             var entity = _dbContext.Characters.FirstOrDefault(x => x.CharacterId == id);
             if (entity == null)
@@ -44,21 +49,21 @@ namespace MLDev.LOTOW.Repositories
             return entity;
         }
 
-
-
-        public Character Update(Character character)
+        public ResponseDto Save()
         {
-            var entity = _dbContext.Characters.FirstOrDefault(x => x.CharacterId == character.CharacterId);
-            if (entity == null)
+            var response = new ResponseDto();
+            try
             {
-                return null;
+                _dbContext.SaveChanges();
+                response.Success = true;
             }
-            entity.Name = character.Name;
-            entity.Level = character.Level;
-            entity.Cost = character.Cost;
-            entity.CharacterStats = character.CharacterStats;
-
-            return entity;
+            catch (DbUpdateException e)
+            {
+                response.Success &= false;
+                response.ErrorMessage = e.Message;
+                // handle the update exception
+            }
+            return response;
         }
     }
 }

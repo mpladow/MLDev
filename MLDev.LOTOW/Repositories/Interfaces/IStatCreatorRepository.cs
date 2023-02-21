@@ -1,14 +1,14 @@
 ﻿using MLDev.LOTOW.Data.Entities;
 
-namespace MLDev.LOTOW.Services.Interfaces
+namespace MLDev.LOTOW.Repositories.Interfaces
 {
-    public interface IStatCreatorService
+    public interface IStatCreatorRepository
     {
         List<Stat> GetStats();
         Stat GetStatById(int id);
-        Stat UpdateStat(Stat stat);
         Stat CreateStat(Stat stat);
+        Stat UpdateStat(int id, Stat stat);
         void DeleteStat(int id);
-
+        void Save();
     }
 }

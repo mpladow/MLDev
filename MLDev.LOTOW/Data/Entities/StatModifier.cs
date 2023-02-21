@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MLDev.LOTOW.Models
+namespace MLDev.LOTOW.Data.Entities
 {
     [Table("StatModifier", Schema = "LOTOW")]
     public class StatModifier

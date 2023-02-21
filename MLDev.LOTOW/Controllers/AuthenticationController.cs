@@ -23,6 +23,7 @@ namespace MLDev.LOTOW.Controllers
             _userAuthenticationService = userAuthenticationService;
         }
         [HttpPost]
+        [Route("register")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> Register([FromBody] UserRegistrationDto user)

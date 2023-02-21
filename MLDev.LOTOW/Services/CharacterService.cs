@@ -1,6 +1,7 @@
-﻿using MLDev.LOTOW.Data;
+﻿using AutoMapper;
+using MLDev.LOTOW.Data.Entities;
+using MLDev.LOTOW.DTOs;
 using MLDev.LOTOW.Models;
-using MLDev.LOTOW.Repositories;
 using MLDev.LOTOW.Repositories.Interfaces;
 using MLDev.LOTOW.Services.Interfaces;
 
@@ -8,37 +9,62 @@ namespace MLDev.LOTOW.Services
 {
     public class CharacterService : ICharacterService
     {
+        private ICharacterRepository _repo;
+        private readonly IMapper _mapper;
 
-        private readonly ICharacterRepository _characterRepository;
-
-        public CharacterService(ICharacterRepository characterRepository)
+        public CharacterService(ICharacterRepository repo, IMapper mapper)
         {
-            _characterRepository = characterRepository;
+            _repo = repo;
+            _mapper = mapper;
         }
 
-        public List<Character> GetCharacters()
+        public List<CharacterDto> GetCharacters()
         {
-            return _characterRepository.Get();
+            var characters = _repo.GetCharacters();
+            var charactersDto = characters.Select(_mapper.Map<Character, CharacterDto>);
+            return charactersDto.ToList();
         }
-        public Character CreateCharacter(Character character)
+        public CharacterDto? CreateCharacter(CharacterDto character)
         {
-            return _characterRepository.Create(character);
+            var newCharacter = _mapper.Map<Character>(character);
+            var response = _repo.CreateCharacter(newCharacter);
+            if (response == null)
+            {
+                return null;
+            }
+            character = _mapper.Map<CharacterDto>(response);
+            return character;
         }
 
-        public bool DeleteCharacter(int id)
+        public ResponseDto DeleteCharacter(int id)
         {
-            return _characterRepository.Delete(id);
+            return _repo.DeleteCharacter(id);
         }
 
-        public Character GetCharacterById(int id)
+        public CharacterDto? GetCharacterById(int id)
         {
-            return _characterRepository.Get(id);
+            var character = _repo.GetCharacter(id);
+            if (character == null)
+            {
+                return null;
+            }
+            var characterDto = _mapper.Map<CharacterDto>(character);
+            return characterDto;
         }
 
-
-        public Character UpdateCharacter(Character character)
+        public CharacterDto? UpdateCharacter(CharacterDto character)
         {
-            return _characterRepository.Update(character);
+            try
+            {
+            var charToUpdate = _repo.GetCharacter(character.CharacterId);
+            _mapper.Map(character, charToUpdate);
+            _repo.Save();
+            }
+            catch
+            {
+                return null;
+            }
+            return character;
         }
     }
 }

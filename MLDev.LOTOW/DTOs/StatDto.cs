@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MLDev.LOTOW.Models
+namespace MLDev.LOTOW.DTOs
 {
-    [Table("Stat", Schema = "LOTOW")]
-
-    public class Stat
+    public class StatDto
     {
         public int StatId { get; set; }
         public int Order { get; set; }

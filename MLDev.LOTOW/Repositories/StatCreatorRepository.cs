@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using MLDev.LOTOW.Data;
 using MLDev.LOTOW.Data.Entities;
+using MLDev.LOTOW.Models;
 using MLDev.LOTOW.Repositories.Interfaces;
 
 namespace MLDev.LOTOW.Repositories
@@ -17,21 +19,33 @@ namespace MLDev.LOTOW.Repositories
             _mapper = mapper;
         }
 
-        public Stat CreateStat(Stat stat)
+        public Stat Create(Stat stat)
         {
             _dbContext.Add(stat);
             _dbContext.SaveChanges();
             return stat;
         }
 
-        public void DeleteStat(int id)
+        public ResponseDto Delete(int id)
         {
-            var statToDelete = _dbContext.Stats.FirstOrDefault(x => x.StatId == id);
-            if (statToDelete != null)
+            var response = new ResponseDto();
+            try
             {
-                _dbContext.Stats.Remove(statToDelete);
-                _dbContext.SaveChanges();
+                var statToDelete = _dbContext.Stats.FirstOrDefault(x => x.StatId == id);
+                if (statToDelete != null)
+                {
+                    _dbContext.Stats.Remove(statToDelete);
+                    Save();
+                    response.Success = true;
+                }
+                
             }
+            catch(Exception ex)
+            {
+                response.Success= false;
+                response.ErrorMessage = ex.Message;
+            }
+            return response;
         }
 
         public Stat? GetStatById(int id)
@@ -54,10 +68,21 @@ namespace MLDev.LOTOW.Repositories
             }
             return statToUpdate;
         }
-        public void Save()
+        public ResponseDto Save()
         {
-            _dbContext.SaveChanges();
+            var response = new ResponseDto();
+            try
+            {
+                _dbContext.SaveChanges();
+                response.Success = true;
+            }
+            catch (DbUpdateException e)
+            {
+                response.Success &= false;
+                response.ErrorMessage = e.Message;
+                // handle the update exception
+            }
+            return response;
         }
-
     }
 }

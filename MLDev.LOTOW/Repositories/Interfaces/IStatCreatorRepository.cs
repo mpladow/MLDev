@@ -1,4 +1,5 @@
 ﻿using MLDev.LOTOW.Data.Entities;
+using MLDev.LOTOW.Models;
 
 namespace MLDev.LOTOW.Repositories.Interfaces
 {
@@ -6,9 +7,8 @@ namespace MLDev.LOTOW.Repositories.Interfaces
     {
         List<Stat> GetStats();
         Stat GetStatById(int id);
-        Stat CreateStat(Stat stat);
-        Stat UpdateStat(int id, Stat stat);
-        void DeleteStat(int id);
-        void Save();
+        Stat Create(Stat stat);
+        ResponseDto Delete(int id);
+        ResponseDto Save();
     }
 }

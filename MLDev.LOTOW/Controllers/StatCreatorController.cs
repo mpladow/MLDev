@@ -1,92 +1,70 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MLDev.LOTOW.Constants;
+using MLDev.LOTOW.DTOs;
+using MLDev.LOTOW.Models;
 using MLDev.LOTOW.Repositories;
 using MLDev.LOTOW.Repositories.Interfaces;
+using MLDev.LOTOW.Services;
+using MLDev.LOTOW.Services.Interfaces;
 
 namespace MLDev.LOTOW.Controllers
 {
-    public class StatCreatorController : Controller
+    [Authorize(Roles = "Admin")]
+    [Route("api/[controller]")]
+    [ApiController]
+    public class StatCreatorController : ControllerBase
     {
-        private IStatCreatorRepository _statCreatorRepository;
+        private IStatCreatorService _statCreatorService;
 
-        public StatCreatorController(IStatCreatorRepository statCreatorRepository)
+        public StatCreatorController(IStatCreatorService statCreatorService)
         {
-            _statCreatorRepository = statCreatorRepository;
+            _statCreatorService = statCreatorService;
         }
 
-        // GET: StatCreator
-        public ActionResult Index()
+        [HttpGet]
+        public List<StatDto> Index()
         {
-            return View();
+            return _statCreatorService.GetStats().ToList();
         }
 
         // GET: StatCreator/Details/5
-        public ActionResult Details(int id)
+        [HttpGet("{id}")]
+        public StatDto Details(int id)
         {
-            return View();
-        }
-
-        // GET: StatCreator/Create
-        public ActionResult Create()
-        {
-            return View();
+            return _statCreatorService.GetStatById(id);
         }
 
         // POST: StatCreator/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public StatDto? Post(StatDto stat)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return _statCreatorService.CreateStat(stat);
+                
             }
             catch
             {
-                return View();
+                return null;
             }
         }
 
         // GET: StatCreator/Edit/5
-        public ActionResult Edit(int id)
+        [HttpPut("{id}")]
+        public StatDto Put([FromBody] StatDto character)
         {
-            return View();
+            var result = _statCreatorService.UpdateStat(character);
+            return result;
         }
 
-        // POST: StatCreator/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // DELETE api/<StatCreator>/5
+        [HttpDelete("{id}")]
+        public ResponseDto Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: StatCreator/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: StatCreator/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var result = _statCreatorService.DeleteStat(id);
+            return result;
         }
     }
 }

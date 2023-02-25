@@ -1,14 +1,16 @@
 ﻿using MLDev.LOTOW.Data.Entities;
+using MLDev.LOTOW.DTOs;
+using MLDev.LOTOW.Models;
 
 namespace MLDev.LOTOW.Services.Interfaces
 {
     public interface IStatCreatorService
     {
-        List<Stat> GetStats();
-        Stat GetStatById(int id);
-        Stat UpdateStat(Stat stat);
-        Stat CreateStat(Stat stat);
-        void DeleteStat(int id);
+        List<StatDto> GetStats();
+        StatDto GetStatById(int id);
+        StatDto UpdateStat(StatDto stat);
+        StatDto CreateStat(StatDto stat);
+        ResponseDto DeleteStat(int id);
 
     }
 }

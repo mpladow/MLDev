@@ -15,14 +15,10 @@ namespace MLDev.LOTOW.Controllers
     public class CharactersController : ControllerBase
     {
         // GET: api/<CharactersController>
-        private ICharacterRepository _repo;
-
         public ICharacterService _characterService;
 
-        public CharactersController(ICharacterRepository characterRepository
-            ,ICharacterService characterService)
+        public CharactersController(ICharacterService characterService)
         {
-            _repo = characterRepository;
             _characterService = characterService;
         }
         [HttpGet]
@@ -53,7 +49,6 @@ namespace MLDev.LOTOW.Controllers
         public CharacterDto Put([FromBody] CharacterDto character)
         {
             var result = _characterService.UpdateCharacter(character);
-            _repo.Save();
             return result;
         }
 

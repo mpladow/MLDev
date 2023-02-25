@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using MLDev.LOTOW.Constants;
 using MLDev.LOTOW.DTOs;
 using MLDev.LOTOW.Models.Authentication;
@@ -48,9 +49,19 @@ namespace MLDev.LOTOW.Repositories
             }
             await SeedRoles();
             result = await _userManager.AddToRoleAsync(newUser, DUMMYROLENAME);
+            
 
             return new RegisterUserResult { Succeeded = true };
         }
+        ////TODO: move to roles service
+        //public async void UpdateUser(string id)
+        //{
+        //    var user = await _userManager.FindByIdAsync(id);
+        //    if (user != null)
+        //    {
+        //        var result = await _userManager.AddToRoleAsync(user, Roles.Admin);
+        //    }
+        //}
 
 
         public async Task<UserLoginResultDto> LoginAsync(UserLoginDto user)

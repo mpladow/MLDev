@@ -1,33 +1,55 @@
-﻿using MLDev.LOTOW.Data.Entities;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using MLDev.LOTOW.Data.Entities;
+using MLDev.LOTOW.DTOs;
+using MLDev.LOTOW.Models;
+using MLDev.LOTOW.Repositories.Interfaces;
 using MLDev.LOTOW.Services.Interfaces;
 
 namespace MLDev.LOTOW.Services
 {
     public class StatCreatorService : IStatCreatorService
     {
-        public Stat CreateStat(Stat stat)
+        private readonly IStatCreatorRepository _statCreatorRepository;
+        private readonly IMapper _mapper;
+
+        public StatCreatorService(IStatCreatorRepository statCreatorRepository, IMapper mapper)
+        {
+            _statCreatorRepository = statCreatorRepository;
+            _mapper = mapper;
+        }
+
+        public IMapper Mapper { get; }
+
+        public StatDto CreateStat(StatDto stat)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteStat(int id)
+        public ResponseDto DeleteStat(int id)
+        {
+            return _statCreatorRepository.Delete(id);
+        }
+
+        public StatDto GetStatById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Stat GetStatById(int id)
+        public List<StatDto> GetStats()
         {
             throw new NotImplementedException();
         }
 
-        public List<Stat> GetStats()
+        public StatDto UpdateStat(StatDto stat)
         {
-            throw new NotImplementedException();
-        }
-
-        public Stat UpdateStat(Stat stat)
-        {
-            throw new NotImplementedException();
+            var statToUpdate = _statCreatorRepository.GetStatById(stat.StatId);
+            if (statToUpdate != null)
+            {
+                _mapper.Map(stat,statToUpdate);
+                _statCreatorRepository.Save();
+            }
+            return stat;
         }
     }
 }

@@ -22,7 +22,9 @@ namespace MLDev.LOTOW.Automapper.Mappings
             CreateMap<Stat, StatDto>();
             CreateMap<StatDto, Stat>();
             CreateMap<StatModifier, StatModifier>();
-            CreateMap<StatModifierDto, StatModifier>(); 
+            CreateMap<StatModifierDto, StatModifier>();
+            CreateMap<StatModifier, StatModifierDto>();
+
 
 
         }

@@ -2,6 +2,7 @@ using Azure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MLDev.LOTOW.Automapper.Mappings;
@@ -110,7 +111,13 @@ namespace MLDev.LOTOW
             builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
             builder.Services.AddScoped<IClaimsService, ClaimsService>();
             builder.Services.AddScoped<IJWTokenService, JwTokenService>();
-            builder.Services.AddAutoMapper(typeof(UserMappingProfile).Assembly);
+            //builder.Services.AddAutoMapper(AppDomain
+            //    .CurrentDomain.GetAssemblies());
+            //builder.Services.AddAutoMapper(typeof(UserMappingProfile).Assembly);
+            builder.Services.AddAutoMapper(config =>
+            {
+                config.AddProfile(typeof(UserMappingProfile));
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

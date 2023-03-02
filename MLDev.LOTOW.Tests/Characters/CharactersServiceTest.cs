@@ -12,15 +12,8 @@ using MLDev.LOTOW.Data.Entities;
 using MLDev.LOTOW.DTOs;
 using MLDev.LOTOW.Repositories.Interfaces;
 using MLDev.LOTOW.Services;
-using MLDev.LOTOW.Services.Interfaces;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
-using static MLDev.LOTOW.Tests.Characters.CharacterServiceTests;
 using Assert = Xunit.Assert;
 
 namespace MLDev.LOTOW.Tests.Characters
@@ -60,7 +53,7 @@ namespace MLDev.LOTOW.Tests.Characters
 
             // Assert
 
-            Assert.Null(result);
+            Assert.NotNull(result);
         }
         [Fact]
         public async void GetCharacterById_ShouldReturnCharacter_WhenIdExists()

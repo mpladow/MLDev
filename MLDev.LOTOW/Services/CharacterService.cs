@@ -36,7 +36,7 @@ namespace MLDev.LOTOW.Services
             return character;
         }
 
-        public ResponseDto DeleteCharacter(int id)
+        public ApiResponseDto DeleteCharacter(int id)
         {
             return _repo.DeleteCharacter(id);
         }

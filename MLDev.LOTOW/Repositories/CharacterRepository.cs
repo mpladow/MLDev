@@ -24,9 +24,9 @@ namespace MLDev.LOTOW.Repositories
             return result.Entity;
         }
 
-        public ResponseDto DeleteCharacter(int id)
+        public ApiResponseDto DeleteCharacter(int id)
         {
-            var response = new ResponseDto();
+            var response = new ApiResponseDto();
             var entity = _dbContext.Characters.FirstOrDefault(x => x.CharacterId == id);
             if (entity == null)
             {
@@ -49,9 +49,9 @@ namespace MLDev.LOTOW.Repositories
             return entity;
         }
 
-        public ResponseDto Save()
+        public ApiResponseDto Save()
         {
-            var response = new ResponseDto();
+            var response = new ApiResponseDto();
             try
             {
                 _dbContext.SaveChanges();

@@ -1,17 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MLDev.LOTOW.Constants;
 using MLDev.LOTOW.DTOs;
 using MLDev.LOTOW.Models;
-using MLDev.LOTOW.Repositories;
-using MLDev.LOTOW.Repositories.Interfaces;
-using MLDev.LOTOW.Services;
 using MLDev.LOTOW.Services.Interfaces;
 
 namespace MLDev.LOTOW.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class StatCreatorController : ControllerBase
@@ -61,7 +56,7 @@ namespace MLDev.LOTOW.Controllers
 
         // DELETE api/<StatCreator>/5
         [HttpDelete("{id}")]
-        public ResponseDto Delete(int id)
+        public ApiResponseDto Delete(int id)
         {
             var result = _statCreatorService.DeleteStat(id);
             return result;

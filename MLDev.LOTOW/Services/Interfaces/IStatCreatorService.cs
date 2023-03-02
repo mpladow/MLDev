@@ -10,7 +10,7 @@ namespace MLDev.LOTOW.Services.Interfaces
         StatDto GetStatById(int id);
         StatDto UpdateStat(StatDto stat);
         StatDto CreateStat(StatDto stat);
-        ResponseDto DeleteStat(int id);
+        ApiResponseDto DeleteStat(int id);
 
     }
 }

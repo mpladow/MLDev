@@ -8,8 +8,8 @@ namespace MLDev.LOTOW.Repositories.Interfaces
         List<Character> GetCharacters();
         Character GetCharacter(int id);
         Character CreateCharacter(Character character);
-        ResponseDto DeleteCharacter(int id);
-        ResponseDto Save();
+        ApiResponseDto DeleteCharacter(int id);
+        ApiResponseDto Save();
 
     }
 }

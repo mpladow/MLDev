@@ -26,9 +26,9 @@ namespace MLDev.LOTOW.Repositories
             return stat;
         }
 
-        public ResponseDto Delete(int id)
+        public ApiResponseDto Delete(int id)
         {
-            var response = new ResponseDto();
+            var response = new ApiResponseDto();
             try
             {
                 var statToDelete = _dbContext.Stats.FirstOrDefault(x => x.StatId == id);
@@ -68,9 +68,9 @@ namespace MLDev.LOTOW.Repositories
             }
             return statToUpdate;
         }
-        public ResponseDto Save()
+        public ApiResponseDto Save()
         {
-            var response = new ResponseDto();
+            var response = new ApiResponseDto();
             try
             {
                 _dbContext.SaveChanges();

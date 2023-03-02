@@ -9,7 +9,7 @@ using MLDev.LOTOW.Services.Interfaces;
 
 namespace MLDev.LOTOW.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class CharactersController : ControllerBase
@@ -54,7 +54,7 @@ namespace MLDev.LOTOW.Controllers
 
         // DELETE api/<CharactersController>/5
         [HttpDelete("{id}")]
-        public ResponseDto Delete(int id)
+        public ApiResponseDto Delete(int id)
         {
             var result = _characterService.DeleteCharacter(id);
             return result;

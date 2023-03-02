@@ -9,6 +9,6 @@ namespace MLDev.LOTOW.Services.Interfaces
         CharacterDto GetCharacterById(int id);
         CharacterDto CreateCharacter(CharacterDto character);
         CharacterDto UpdateCharacter(CharacterDto character);
-        ResponseDto DeleteCharacter(int id);
+        ApiResponseDto DeleteCharacter(int id);
     }
 }

@@ -8,7 +8,7 @@ namespace MLDev.LOTOW.Repositories.Interfaces
         List<Stat> GetStats();
         Stat GetStatById(int id);
         Stat Create(Stat stat);
-        ResponseDto Delete(int id);
-        ResponseDto Save();
+        ApiResponseDto Delete(int id);
+        ApiResponseDto Save();
     }
 }

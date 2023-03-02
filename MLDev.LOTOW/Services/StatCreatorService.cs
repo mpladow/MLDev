@@ -26,7 +26,7 @@ namespace MLDev.LOTOW.Services
             throw new NotImplementedException();
         }
 
-        public ResponseDto DeleteStat(int id)
+        public ApiResponseDto DeleteStat(int id)
         {
             return _statCreatorRepository.Delete(id);
         }

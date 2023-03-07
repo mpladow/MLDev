@@ -1,7 +1,4 @@
-﻿using MLDev.LOTOW.Data.Entities;
-using MLDev.LOTOW.DTOs;
-using MLDev.LOTOW.Models;
-
+﻿using MLDev.Data.DTOs;
 namespace MLDev.LOTOW.Services.Interfaces
 {
     public interface IStatCreatorService

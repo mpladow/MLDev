@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MLDev.LOTOW.DTOs;
-using MLDev.LOTOW.Models;
-using MLDev.LOTOW.Repositories.Interfaces;
+using MLDev.Data.DTOs;
 using MLDev.LOTOW.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

@@ -1,5 +1,5 @@
-﻿using MLDev.LOTOW.DTOs;
-using MLDev.LOTOW.Models;
+﻿using MLDev.Data.DTOs;
+using MLDev.LOTOW.DTOs;
 
 namespace MLDev.LOTOW.Services.Interfaces
 {

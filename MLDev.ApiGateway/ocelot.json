@@ -1,0 +1,11 @@
+﻿{
+  "GlobalConfiguration": {
+    "BaseUrl":  "http://localhost:5003"
+  },
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/gateway/characters",
+      "UpstreamHttpMethod": [ "Get" ],
+      ""
+    }
+  ]

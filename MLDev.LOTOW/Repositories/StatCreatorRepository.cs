@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using MLDev.LOTOW.Data;
-using MLDev.LOTOW.Data.Entities;
-using MLDev.LOTOW.Models;
+using MLDev.Data.Data;
+using MLDev.Data.Data.Entities;
+using MLDev.Data.DTOs;
 using MLDev.LOTOW.Repositories.Interfaces;
 
 namespace MLDev.LOTOW.Repositories

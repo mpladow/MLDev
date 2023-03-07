@@ -1,5 +1,5 @@
-﻿using MLDev.LOTOW.Data.Entities;
-using MLDev.LOTOW.Models;
+﻿using MLDev.Data.Data.Entities;
+using MLDev.Data.DTOs;
 
 namespace MLDev.LOTOW.Repositories.Interfaces
 {

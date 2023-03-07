@@ -2,17 +2,20 @@ using Azure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MLDev.AuthService.Services;
+using MLDev.AuthSystem.Models.Authentication;
+using MLDev.AuthSystem.Repositories;
+using MLDev.AuthSystem.Repositories.Interfaces;
+using MLDev.AuthSystem.Services;
+using MLDev.AuthSystem.Services.Interfaces;
+using MLDev.Data.Data;
 using MLDev.LOTOW.Automapper.Mappings;
-using MLDev.LOTOW.Data;
-using MLDev.LOTOW.Models.Authentication;
 using MLDev.LOTOW.Repositories;
 using MLDev.LOTOW.Repositories.Interfaces;
 using MLDev.LOTOW.Services;
 using MLDev.LOTOW.Services.Interfaces;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace MLDev.LOTOW
@@ -103,8 +106,7 @@ namespace MLDev.LOTOW
             });
 
             builder.Services.AddDbContext<LOTOWDbContext>(options =>
-                options.UseSqlServer(connString)
-            );
+                options.UseSqlServer(connString));
             builder.Services.AddScoped<ICharacterRepository, CharacterRepository>();
             builder.Services.AddScoped<IUserAuthenticationRepository, UserAuthenticationRespository>();
             builder.Services.AddScoped<ICharacterService, CharacterService>();

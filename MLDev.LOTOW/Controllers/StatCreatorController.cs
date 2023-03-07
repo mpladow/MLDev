@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MLDev.LOTOW.DTOs;
-using MLDev.LOTOW.Models;
+using MLDev.Data.DTOs;
 using MLDev.LOTOW.Services.Interfaces;
 
 namespace MLDev.LOTOW.Controllers

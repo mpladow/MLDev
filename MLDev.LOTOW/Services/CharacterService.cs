@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using MLDev.LOTOW.Data.Entities;
-using MLDev.LOTOW.DTOs;
-using MLDev.LOTOW.Models;
+using MLDev.Data.Data.Entities;
+using MLDev.Data.DTOs;
 using MLDev.LOTOW.Repositories.Interfaces;
 using MLDev.LOTOW.Services.Interfaces;
 

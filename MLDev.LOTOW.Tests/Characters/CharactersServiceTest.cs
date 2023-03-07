@@ -1,15 +1,8 @@
 ﻿using AutoFixture;
 using AutoMapper;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel.DataCollector.InProcDataCollector;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MLDev.Data.Data.Entities;
+using MLDev.Data.DTOs;
 using MLDev.LOTOW.Automapper.Mappings;
-using MLDev.LOTOW.Controllers;
-using MLDev.LOTOW.Data;
-using MLDev.LOTOW.Data.Entities;
-using MLDev.LOTOW.DTOs;
 using MLDev.LOTOW.Repositories.Interfaces;
 using MLDev.LOTOW.Services;
 using Moq;

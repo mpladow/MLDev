@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
-using MLDev.LOTOW.Data.Entities;
+using MLDev.AuthSystem.DTOs;
+using MLDev.AuthSystem.Models.Authentication;
+using MLDev.Data.Data.Entities;
+using MLDev.Data.DTOs;
 using MLDev.LOTOW.DTOs;
-using MLDev.LOTOW.Models.Authentication;
 
 namespace MLDev.LOTOW.Automapper.Mappings
 {
